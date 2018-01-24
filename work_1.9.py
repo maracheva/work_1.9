@@ -3,33 +3,20 @@
 
 def read_file():
     cook_book = {}
-    list_dish_name = []  # новый список "наименование блюда"
     with open('menu.txt', 'r', encoding='utf-8') as file:
         for line in file:
             dish_name = line.strip().lower()  # создаем переменную "название блюда", убираем пустую строку, делаем нижний регистр
-            list_dish_name.append(dish_name)  # добавляем переменную в список блюд
-            print(dish_name)
-            print(list_dish_name)
             list_ingridient_name = []  # новый список ингридиентов
-            count_dish = file.readline()  # количество ингридентов в одном блюде
-            count_dish = count_dish.strip() # убираем пробелы
-            print(count_dish)
-            for i in range(int(count_dish)):
-                # list_ingridient_name.append(i)
-                ingridient_name = file.readline()
-                ingridient_name = ingridient_name.split(' | ')
+            count_ingridient = file.readline().strip()  # количество ингридентов в одном блюде, убираем пробелы
+            for name in range(int(count_ingridient)):
+                name = file.readline().split(' | ') # добавляем разделитель
                 list_ingridient_name.append(
-                    {'ingridient_name': ingridient_name[0].strip().lower(),
-                     'quantity': int(ingridient_name[1]),
-                     'measure': ingridient_name[2].strip()})
-            cook_book[count_dish] = list_ingridient_name
-            # cook_book[dish_name] = list_dish_name
-            return cook_book
-
-        file.readline()
-      #  return list_dish_name
-read_file()
-print(read_file())
+                    {'ingridient_name': name[0].strip().lower(),
+                     'quantity': int(name[1]),
+                     'measure': name[2].strip()})
+                cook_book[dish_name] = list_ingridient_name
+            file.readline()
+        return cook_book
 
 
 def get_shop_list_by_dishes(dishes, person_count):
